@@ -7,7 +7,7 @@ import { setActiveSong, playPause } from "../redux/features/playerSlice";
 import { useGetSongDetailsQuery, useGetSongRelatedQuery } from "../redux/services/shazamCore";
 const SongDetails = () => {
   const dispatch = useDispatch();
-  const { songid, id: artistId } = useParams();
+  const { songid } = useParams();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
   const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery(songid);
@@ -29,7 +29,6 @@ const SongDetails = () => {
   return (
     <div className="flex flex-col">
       <DetailsHeader
-        artistId=""
         songData={songData}
       />
 
@@ -49,9 +48,9 @@ const SongDetails = () => {
         </div>
       </div>
 
+     
       <RelatedSongs
         data={data}
-        artistId={artistId}
         isPlaying={isPlaying}
         activeSong={activeSong}
         handlePauseClick={handlePauseClick}
