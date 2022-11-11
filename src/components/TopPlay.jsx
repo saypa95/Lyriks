@@ -42,12 +42,12 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handle
 const TopPlay = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { data } = useGetTopChartsQuery();
+  const { data, isFetching } = useGetTopChartsQuery();
   const divRef = useRef(null);
 
   useEffect(() => {
     divRef.current.scrollIntoView({ behaivor: "smooth" });
-  }, []);
+  });
 
   const topPlays = data?.slice(0, 5);
 
@@ -60,12 +60,12 @@ const TopPlay = () => {
   };
 
   return (
-    <div ref={divRef} className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col">
+    <div ref={divRef} className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col ">
       <div className="w-full flex flex-col">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Charts</h2>
+          <h2 className="text-white font-bold text-2xl">{isFetching ? "" : "Top Charts"}</h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer">{isFetching ? "" : "See more"}</p>
           </Link>
         </div>
 
@@ -86,9 +86,9 @@ const TopPlay = () => {
 
       <div className="w-full flex flex-col mt-8">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Artists</h2>
+          <h2 className="text-white font-bold text-2xl">{isFetching ? "" : "Top Artists"}</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer">{isFetching ? "" : "See more"}</p>
           </Link>
         </div>
 
